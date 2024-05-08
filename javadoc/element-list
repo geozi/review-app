@@ -1,0 +1,16 @@
+gr.aueb.cf.reviewapp
+gr.aueb.cf.reviewapp.controller
+gr.aueb.cf.reviewapp.model
+gr.aueb.cf.reviewapp.repository
+gr.aueb.cf.reviewapp.security.config
+gr.aueb.cf.reviewapp.security.controller
+gr.aueb.cf.reviewapp.security.filter
+gr.aueb.cf.reviewapp.security.model
+gr.aueb.cf.reviewapp.security.service
+gr.aueb.cf.reviewapp.service
+gr.aueb.cf.reviewapp.service.dto.insertion
+gr.aueb.cf.reviewapp.service.dto.readonly
+gr.aueb.cf.reviewapp.service.dto.update
+gr.aueb.cf.reviewapp.service.exceptions
+gr.aueb.cf.reviewapp.service.mapper
+gr.aueb.cf.reviewapp.service.validation
