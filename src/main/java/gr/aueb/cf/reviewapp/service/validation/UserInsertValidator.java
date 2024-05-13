@@ -30,6 +30,7 @@ public class UserInsertValidator implements Validator {
 
         String username = userInsertDTO.getUsername();
         String password = userInsertDTO.getPassword();
+        String email = userInsertDTO.getEmail();
         Role role = userInsertDTO.getRole();
 
         // Username
@@ -39,6 +40,10 @@ public class UserInsertValidator implements Validator {
         // Password
         if(Objects.equals(password, null)) errors.rejectValue("password", "NotNull");
         ValidationUtils.rejectIfEmpty(errors, "password", "empty");
+
+        // Email
+        if(Objects.equals(email, null)) errors.rejectValue("email", "NotNull");
+        ValidationUtils.rejectIfEmpty(errors, "email", "empty");
 
         // Role
         if(Objects.equals(role, null)) errors.rejectValue("role", "NotNull");

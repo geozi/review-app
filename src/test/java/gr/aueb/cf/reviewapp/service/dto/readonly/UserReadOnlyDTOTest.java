@@ -24,6 +24,7 @@ class UserReadOnlyDTOTest {
         userDTO.setId("662674b67d15975b73a50be2");
         userDTO.setUsername("th0rax*");
         userDTO.setPassword("IiKU1xl3t4");
+        userDTO.setEmail("test@random.org");
         userDTO.setRole(Role.USER);
     }
 
@@ -32,6 +33,7 @@ class UserReadOnlyDTOTest {
         userDTO.setId(null);
         userDTO.setUsername(null);
         userDTO.setPassword(null);
+        userDTO.setEmail(null);
         userDTO.setRole(null);
     }
 
@@ -63,6 +65,16 @@ class UserReadOnlyDTOTest {
                 () -> assertNotNull(password),
                 () -> assertFalse(password.isEmpty()),
                 () -> assertEquals("IiKU1xl3t4", password)
+        );
+    }
+
+    @Test
+    void getEmail() {
+        String email = userDTO.getEmail();
+        assertAll(
+                () -> assertNotNull(email),
+                () -> assertFalse(email.isEmpty()),
+                () -> assertEquals("test@random.org", email)
         );
     }
 
@@ -109,6 +121,18 @@ class UserReadOnlyDTOTest {
                 () -> assertFalse(password.isEmpty()),
                 () -> assertNotEquals("IiKU1xl3t4", password),
                 () -> assertEquals("bjcmhAk0t4", password)
+        );
+    }
+
+    @Test
+    void setEmail() {
+        userDTO.setEmail("new@email.com");
+        String email = userDTO.getEmail();
+        assertAll(
+                () -> assertNotNull(email),
+                () -> assertFalse(email.isEmpty()),
+                () -> assertNotEquals("test@random.org", email),
+                () -> assertEquals("new@email.com", email)
         );
     }
 

@@ -26,13 +26,15 @@ public class User {
     @Indexed(unique=true, name = "username_idx")
     private String username;
     private String password;
+    private String email;
     private Role role;
 
     // Constructor
 
-    public User(String username, String password, Role role) {
+    public User(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.role = role;
     }
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1
  */
 @RestController
+@RequestMapping("/api")
 public class UserRestController {
 
     private final IUserService userService;

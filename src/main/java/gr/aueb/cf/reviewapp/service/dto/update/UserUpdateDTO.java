@@ -26,5 +26,7 @@ public class UserUpdateDTO {
     @NotNull
     private String password;
     @NotNull
+    private String email;
+    @NotNull
     private Role role;
 }

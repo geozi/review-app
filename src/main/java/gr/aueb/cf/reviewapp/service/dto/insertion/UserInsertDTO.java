@@ -21,5 +21,6 @@ import lombok.Setter;
 public class UserInsertDTO {
     private String username;
     private String password;
+    private String email;
     private Role role;
 }

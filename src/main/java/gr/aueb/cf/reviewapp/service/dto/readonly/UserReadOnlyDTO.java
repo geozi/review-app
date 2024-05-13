@@ -27,5 +27,7 @@ public class UserReadOnlyDTO {
     @NotNull
     private String password;
     @NotNull
+    private String email;
+    @NotNull
     private Role role;
 }

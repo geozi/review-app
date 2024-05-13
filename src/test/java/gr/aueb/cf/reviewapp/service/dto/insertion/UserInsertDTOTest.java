@@ -21,6 +21,7 @@ class UserInsertDTOTest {
     void setUp() {
         userInsertDTO.setUsername("N0ev");
         userInsertDTO.setPassword("SFv4anEdam");
+        userInsertDTO.setEmail("test@test.com");
         userInsertDTO.setRole(Role.USER);
     }
 
@@ -28,6 +29,7 @@ class UserInsertDTOTest {
     void tearDown() {
         userInsertDTO.setUsername(null);
         userInsertDTO.setPassword(null);
+        userInsertDTO.setEmail(null);
         userInsertDTO.setRole(null);
     }
 
@@ -50,6 +52,16 @@ class UserInsertDTOTest {
                 () -> assertNotNull(password),
                 () -> assertFalse(password.isEmpty()),
                 () -> assertEquals("SFv4anEdam", password)
+        );
+    }
+
+    @Test
+    void getEmail() {
+        String email = userInsertDTO.getEmail();
+        assertAll(
+                () -> assertNotNull(email),
+                () -> assertFalse(email.isEmpty()),
+                () -> assertEquals("test@test.com", email)
         );
     }
 
@@ -87,6 +99,19 @@ class UserInsertDTOTest {
                 () -> assertEquals("WKm4NAMQLn", password)
         );
     }
+
+    @Test
+    void setEmail() {
+        userInsertDTO.setEmail("new@email.org");
+        String email = userInsertDTO.getEmail();
+        assertAll(
+                () -> assertNotNull(email),
+                () -> assertFalse(email.isEmpty()),
+                () -> assertNotEquals("test@test.com", email),
+                () -> assertEquals("new@email.org", email)
+        );
+    }
+
     @Test
     void setRole() {
         userInsertDTO.setRole(Role.ADMIN);

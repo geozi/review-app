@@ -18,18 +18,18 @@ public class UserMapper {
     private UserMapper() {}
 
     public static User mapToUser(UserInsertDTO dto) {
-        return new User(dto.getUsername(), dto.getPassword(), dto.getRole());
+        return new User(dto.getUsername(), dto.getPassword(), dto.getEmail(), dto.getRole());
     }
 
     public static User mapToUser(UserUpdateDTO dto) {
-        return new User(dto.getId(), dto.getUsername(), dto.getPassword(), dto.getRole());
+        return new User(dto.getId(), dto.getUsername(), dto.getPassword(), dto.getEmail(), dto.getRole());
     }
 
     public static User mapToUser(UserReadOnlyDTO dto) {
-        return new User(dto.getId(), dto.getUsername(), dto.getPassword(), dto.getRole());
+        return new User(dto.getId(), dto.getUsername(), dto.getPassword(),  dto.getEmail(), dto.getRole());
     }
 
     public static UserReadOnlyDTO mapToUserReadOnlyDTO(User user) {
-        return new UserReadOnlyDTO(user.getId(), user.getUsername(), user.getPassword(), user.getRole());
+        return new UserReadOnlyDTO(user.getId(), user.getUsername(), user.getPassword(), user.getEmail(), user.getRole());
     }
 }

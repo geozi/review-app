@@ -23,6 +23,7 @@ class UserTest {
         user.setId("6625440c62dd257d31054d38");
         user.setUsername("user1");
         user.setPassword("xo26geA9vn");
+        user.setEmail("test@random.org");
         user.setRole(Role.USER);
     }
 
@@ -31,6 +32,7 @@ class UserTest {
         user.setId(null);
         user.setUsername(null);
         user.setPassword(null);
+        user.setEmail(null);
         user.setRole(null);
     }
 
@@ -62,6 +64,16 @@ class UserTest {
                 () -> assertNotNull(password),
                 () -> assertFalse(password.isEmpty()),
                 () -> assertEquals("xo26geA9vn", password)
+        );
+    }
+
+    @Test
+    void getEmail() {
+        String email = user.getEmail();
+        assertAll(
+                () -> assertNotNull(email),
+                () -> assertFalse(email.isEmpty()),
+                () -> assertEquals("test@random.org", email)
         );
     }
 
@@ -108,6 +120,18 @@ class UserTest {
                 () -> assertFalse(password.isEmpty()),
                 () -> assertNotEquals("xo26geA9vn", password),
                 () -> assertEquals("RbRXP5fn7Q", password)
+        );
+    }
+
+    @Test
+    void setEmail() {
+        user.setEmail("newEmail@email.org");
+        String email = user.getEmail();
+        assertAll(
+                () -> assertNotNull(email),
+                () -> assertFalse(email.isEmpty()),
+                () -> assertNotEquals("test@random.org", email),
+                () -> assertEquals("newEmail@email.org", email)
         );
     }
 
