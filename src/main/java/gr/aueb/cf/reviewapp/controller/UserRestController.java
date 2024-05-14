@@ -46,19 +46,19 @@ public class UserRestController {
             content = @Content)
     })
     @PostMapping("/register")
-    public ResponseEntity<HttpStatusCode> registerUser(@Valid @RequestBody UserInsertDTO dto,
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserInsertDTO dto,
                                                        BindingResult bindingResult) {
 
         userInsertValidator.validate(dto, bindingResult);
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Error in user registration data", HttpStatus.BAD_REQUEST);
         }
 
         try {
             userService.insertUser(dto);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>("User created", HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<>("Failure in User registration", HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
 }
