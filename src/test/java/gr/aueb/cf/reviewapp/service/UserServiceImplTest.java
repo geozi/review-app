@@ -16,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
+@ExtendWith({SpringExtension.class})
 class UserServiceImplTest {
 
     private final UserRepo repo;
