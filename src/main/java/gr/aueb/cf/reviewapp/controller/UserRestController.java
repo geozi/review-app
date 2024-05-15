@@ -9,6 +9,7 @@ import gr.aueb.cf.reviewapp.service.dto.registration.UserRegSuccessDTO;
 import gr.aueb.cf.reviewapp.service.validation.UserInsertValidator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -41,10 +42,14 @@ public class UserRestController {
     @Operation(summary = "Register a new user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User added",
-            content = @Content),
-            @ApiResponse(responseCode = "400", description = "Invalid input supplied", content = @Content),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserRegSuccessDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid input supplied",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserRegBadDataDTO.class))}),
             @ApiResponse(responseCode = "503", description = "Service unavailable",
-            content = @Content)
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserRegFailureDTO.class))})
     })
     @PostMapping("/register")
     public ResponseEntity<RegBaseDTO> registerUser(@Valid @RequestBody UserInsertDTO dto,
