@@ -2,10 +2,6 @@ package gr.aueb.cf.reviewapp.controller;
 
 import gr.aueb.cf.reviewapp.service.IUserService;
 import gr.aueb.cf.reviewapp.service.dto.insertion.UserInsertDTO;
-import gr.aueb.cf.reviewapp.service.dto.registration.RegBaseDTO;
-import gr.aueb.cf.reviewapp.service.dto.registration.UserRegBadDataDTO;
-import gr.aueb.cf.reviewapp.service.dto.registration.UserRegFailureDTO;
-import gr.aueb.cf.reviewapp.service.dto.registration.UserRegSuccessDTO;
 import gr.aueb.cf.reviewapp.service.validation.UserInsertValidator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The {@link UserRestController} class handles
  * the registration requests of new users.
@@ -35,36 +34,38 @@ public class UserRestController {
 
     private final IUserService userService;
     private final UserInsertValidator userInsertValidator;
-    private final UserRegSuccessDTO userRegSuccessDTO;
-    private final UserRegFailureDTO userRegFailureDTO;
-    private final UserRegBadDataDTO userRegBadData;
 
     @Operation(summary = "Register a new user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User added",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserRegSuccessDTO.class))}),
+                            schema = @Schema(implementation = HashMap.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid input supplied",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserRegBadDataDTO.class))}),
+                            schema = @Schema(implementation = HashMap.class))}),
             @ApiResponse(responseCode = "503", description = "Service unavailable",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserRegFailureDTO.class))})
+                            schema = @Schema(implementation = HashMap.class))})
     })
     @PostMapping("/register")
-    public ResponseEntity<RegBaseDTO> registerUser(@Valid @RequestBody UserInsertDTO dto,
-                                                   BindingResult bindingResult) {
+    public ResponseEntity<Map<String, String>> registerUser(@Valid @RequestBody UserInsertDTO dto,
+                                                BindingResult bindingResult) {
+
+        Map<String, String> body = new HashMap<>();
 
         userInsertValidator.validate(dto, bindingResult);
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<>(userRegBadData, HttpStatus.BAD_REQUEST);
+            body.put("message", "Invalid form data");
+            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
         }
 
         try {
             userService.insertUser(dto);
-            return new ResponseEntity<>(userRegSuccessDTO, HttpStatus.CREATED);
+            body.put("message", "User created");
+            return new ResponseEntity<>(body, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(userRegFailureDTO, HttpStatus.SERVICE_UNAVAILABLE);
+            body.put("message", "Username already in use");
+            return new ResponseEntity<>(body, HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
 }

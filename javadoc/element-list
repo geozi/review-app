@@ -7,10 +7,10 @@ gr.aueb.cf.reviewapp.security.controller
 gr.aueb.cf.reviewapp.security.filter
 gr.aueb.cf.reviewapp.security.model
 gr.aueb.cf.reviewapp.security.service
+gr.aueb.cf.reviewapp.security.service.dto
 gr.aueb.cf.reviewapp.service
 gr.aueb.cf.reviewapp.service.dto.insertion
 gr.aueb.cf.reviewapp.service.dto.readonly
-gr.aueb.cf.reviewapp.service.dto.registration
 gr.aueb.cf.reviewapp.service.dto.update
 gr.aueb.cf.reviewapp.service.exceptions
 gr.aueb.cf.reviewapp.service.mapper

@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The {@link AuthRestController} class handles
  * user login requests.
@@ -35,24 +38,25 @@ public class AuthRestController {
     private final AuthenticationProvider authenticationProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> authenticateUser(@Valid @RequestBody
+    public ResponseEntity<Map<String, String>> authenticateUser(@Valid @RequestBody
                                                              AuthRequest authRequest) throws Exception {
         Authentication authentication;
+        Map<String, String> body = new HashMap<>();
 
         try {
             authentication = authenticationProvider.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
             );
         } catch(BadCredentialsException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            body.put("message", "Username not registered");
+            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
         String jwt = jwtService.generateToken(authUser);
+        body.put("token", jwt);
 
-
-
-        return new ResponseEntity<>(new AuthResponse(jwt), HttpStatus.OK);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 }
