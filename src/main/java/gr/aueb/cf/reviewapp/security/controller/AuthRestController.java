@@ -1,8 +1,6 @@
 package gr.aueb.cf.reviewapp.security.controller;
 
-import gr.aueb.cf.reviewapp.security.model.AuthRequest;
-import gr.aueb.cf.reviewapp.security.model.AuthResponse;
-import gr.aueb.cf.reviewapp.security.model.AuthUser;
+import gr.aueb.cf.reviewapp.security.model.*;
 import gr.aueb.cf.reviewapp.security.service.JwtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The {@link AuthRestController} class handles
@@ -38,25 +34,22 @@ public class AuthRestController {
     private final AuthenticationProvider authenticationProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> authenticateUser(@Valid @RequestBody
+    public ResponseEntity<BaseResponse> authenticateUser(@Valid @RequestBody
                                                              AuthRequest authRequest) throws Exception {
         Authentication authentication;
-        Map<String, String> body = new HashMap<>();
 
         try {
             authentication = authenticationProvider.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
             );
         } catch(BadCredentialsException e) {
-            body.put("message", "Username not registered");
-            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new AuthBadResponse("Bad credentials"), HttpStatus.BAD_REQUEST);
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
         String jwt = jwtService.generateToken(authUser);
-        body.put("token", jwt);
 
-        return new ResponseEntity<>(body, HttpStatus.OK);
+        return new ResponseEntity<>(new AuthGoodResponse(jwt), HttpStatus.OK);
     }
 }
