@@ -2,6 +2,8 @@ package gr.aueb.cf.reviewapp.controller;
 
 import gr.aueb.cf.reviewapp.model.Review;
 import gr.aueb.cf.reviewapp.service.IReviewService;
+import gr.aueb.cf.reviewapp.service.dto.BaseDTO;
+import gr.aueb.cf.reviewapp.service.dto.exception.ReviewCrudExceptionDTO;
 import gr.aueb.cf.reviewapp.service.dto.insertion.ReviewInsertDTO;
 import gr.aueb.cf.reviewapp.service.dto.readonly.ReviewReadOnlyDTO;
 import gr.aueb.cf.reviewapp.service.dto.update.ReviewUpdateDTO;
@@ -18,15 +20,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * The {@link ReviewRestController} class handles the
@@ -104,17 +103,19 @@ public class ReviewRestController {
             content = {@Content(mediaType = "application/json",
             schema = @Schema(implementation = ReviewReadOnlyDTO.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid input supplied",
-            content = @Content),
+            content = {@Content(mediaType = "application/json",
+            schema = @Schema(implementation = ReviewCrudExceptionDTO.class))}),
             @ApiResponse(responseCode = "503", description = "Service unavailable",
-            content = @Content)
+            content = {@Content(mediaType = "application/json",
+            schema = @Schema(implementation = ReviewCrudExceptionDTO.class))})
     })
     @PostMapping("/reviews")
-    public ResponseEntity<ReviewReadOnlyDTO> addReview(@Valid @RequestBody ReviewInsertDTO dto,
-                                                       BindingResult bindingResult) {
+    public ResponseEntity<BaseDTO> addReview(@Valid @RequestBody ReviewInsertDTO dto,
+                                             BindingResult bindingResult) {
         reviewInsertValidator.validate(dto, bindingResult);
-        System.out.println("We are here");
+
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ReviewCrudExceptionDTO("Bad data") ,HttpStatus.BAD_REQUEST);
         }
 
         try {
@@ -126,7 +127,7 @@ public class ReviewRestController {
                     .toUri();
             return ResponseEntity.created(location).body(reviewReadOnlyDTO);
         } catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<>(new ReviewCrudExceptionDTO("Review addition failure"), HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
 

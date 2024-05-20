@@ -9,6 +9,8 @@ gr.aueb.cf.reviewapp.security.model
 gr.aueb.cf.reviewapp.security.service
 gr.aueb.cf.reviewapp.security.service.dto
 gr.aueb.cf.reviewapp.service
+gr.aueb.cf.reviewapp.service.dto
+gr.aueb.cf.reviewapp.service.dto.exception
 gr.aueb.cf.reviewapp.service.dto.insertion
 gr.aueb.cf.reviewapp.service.dto.readonly
 gr.aueb.cf.reviewapp.service.dto.update

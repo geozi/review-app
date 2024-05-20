@@ -1,6 +1,7 @@
 package gr.aueb.cf.reviewapp.service.dto.insertion;
 
 import gr.aueb.cf.reviewapp.model.Review;
+import gr.aueb.cf.reviewapp.service.dto.BaseDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.Setter;
  * The {@link ReviewInsertDTO} class is the DTO
  * equivalent of the {@link Review} domain model class,
  * adjusted for insertion operations.
+ * It inherits from the {@link BaseDTO} abstract class.
  * @author geozi
  * @version 1
  */
@@ -18,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ReviewInsertDTO {
+public class ReviewInsertDTO extends BaseDTO {
     @NotNull
     private String username;
     @NotNull
