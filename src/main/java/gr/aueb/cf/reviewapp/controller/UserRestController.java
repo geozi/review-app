@@ -2,6 +2,7 @@ package gr.aueb.cf.reviewapp.controller;
 
 import gr.aueb.cf.reviewapp.service.IUserService;
 import gr.aueb.cf.reviewapp.service.dto.insertion.UserInsertDTO;
+import gr.aueb.cf.reviewapp.service.dto.registration.UserRegDTO;
 import gr.aueb.cf.reviewapp.service.validation.UserInsertValidator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -37,35 +38,30 @@ public class UserRestController {
 
     @Operation(summary = "Register a new user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User added",
+            @ApiResponse(responseCode = "201", description = "User created",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = HashMap.class))}),
-            @ApiResponse(responseCode = "400", description = "Invalid input supplied",
+                            schema = @Schema(implementation = UserRegDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid input provided",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = HashMap.class))}),
-            @ApiResponse(responseCode = "503", description = "Service unavailable",
+                            schema = @Schema(implementation = UserRegDTO.class))}),
+            @ApiResponse(responseCode = "503", description = "Username already in use",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = HashMap.class))})
+                            schema = @Schema(implementation = UserRegDTO.class))})
     })
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> registerUser(@Valid @RequestBody UserInsertDTO dto,
-                                                BindingResult bindingResult) {
-
-        Map<String, String> body = new HashMap<>();
+    public ResponseEntity<UserRegDTO> registerUser(@Valid @RequestBody UserInsertDTO dto,
+                                                   BindingResult bindingResult) {
 
         userInsertValidator.validate(dto, bindingResult);
         if(bindingResult.hasErrors()) {
-            body.put("message", "Invalid form data");
-            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new UserRegDTO("Invalid input provided"), HttpStatus.BAD_REQUEST);
         }
 
         try {
             userService.insertUser(dto);
-            body.put("message", "User created");
-            return new ResponseEntity<>(body, HttpStatus.CREATED);
+            return new ResponseEntity<>(new UserRegDTO("User created"), HttpStatus.CREATED);
         } catch (Exception e) {
-            body.put("message", "Username already in use");
-            return new ResponseEntity<>(body, HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<>(new UserRegDTO("Username already in use"), HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
 }

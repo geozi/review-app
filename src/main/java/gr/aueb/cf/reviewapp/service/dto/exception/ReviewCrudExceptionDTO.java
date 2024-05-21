@@ -8,7 +8,7 @@ import lombok.Setter;
 
 /**
  * The {@link ReviewCrudExceptionDTO} class is a special
- * DTO class for communicating exceptions to the front end.
+ * DTO class for communicating exceptions to the frontend.
  * It inherits from the {@link BaseDTO} abstract class.
  * @author geozi
  * @version 1

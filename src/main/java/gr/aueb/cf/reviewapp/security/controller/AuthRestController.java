@@ -2,6 +2,11 @@ package gr.aueb.cf.reviewapp.security.controller;
 
 import gr.aueb.cf.reviewapp.security.model.*;
 import gr.aueb.cf.reviewapp.security.service.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,6 +38,15 @@ public class AuthRestController {
     private final JwtService jwtService;
     private final AuthenticationProvider authenticationProvider;
 
+    @Operation(summary = "Authenticate a user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User authenticated",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AuthGoodResponse.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid input supplied",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AuthBadResponse.class))}),
+    })
     @PostMapping("/login")
     public ResponseEntity<BaseResponse> authenticateUser(@Valid @RequestBody
                                                              AuthRequest authRequest) throws Exception {
@@ -43,7 +57,7 @@ public class AuthRestController {
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
             );
         } catch(BadCredentialsException e) {
-            return new ResponseEntity<>(new AuthBadResponse("Bad credentials"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new AuthBadResponse("Invalid input supplied"), HttpStatus.BAD_REQUEST);
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

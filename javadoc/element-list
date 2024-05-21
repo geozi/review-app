@@ -13,6 +13,7 @@ gr.aueb.cf.reviewapp.service.dto
 gr.aueb.cf.reviewapp.service.dto.exception
 gr.aueb.cf.reviewapp.service.dto.insertion
 gr.aueb.cf.reviewapp.service.dto.readonly
+gr.aueb.cf.reviewapp.service.dto.registration
 gr.aueb.cf.reviewapp.service.dto.update
 gr.aueb.cf.reviewapp.service.exceptions
 gr.aueb.cf.reviewapp.service.mapper
