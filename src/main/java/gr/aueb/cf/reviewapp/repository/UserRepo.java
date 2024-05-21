@@ -1,7 +1,6 @@
 package gr.aueb.cf.reviewapp.repository;
 
 import gr.aueb.cf.reviewapp.model.User;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

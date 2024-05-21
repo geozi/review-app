@@ -1,13 +1,9 @@
 package gr.aueb.cf.reviewapp.service.mapper;
 
 import gr.aueb.cf.reviewapp.model.Review;
-import gr.aueb.cf.reviewapp.model.User;
 import gr.aueb.cf.reviewapp.service.dto.insertion.ReviewInsertDTO;
-import gr.aueb.cf.reviewapp.service.dto.insertion.UserInsertDTO;
 import gr.aueb.cf.reviewapp.service.dto.readonly.ReviewReadOnlyDTO;
-import gr.aueb.cf.reviewapp.service.dto.readonly.UserReadOnlyDTO;
 import gr.aueb.cf.reviewapp.service.dto.update.ReviewUpdateDTO;
-import gr.aueb.cf.reviewapp.service.dto.update.UserUpdateDTO;
 import org.springframework.stereotype.Component;
 
 /**

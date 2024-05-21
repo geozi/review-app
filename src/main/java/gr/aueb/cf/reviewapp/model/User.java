@@ -8,8 +8,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.util.Set;
-
 /**
  * The {@link User} class represents an app User.
  * @author geozi
