@@ -137,20 +137,24 @@ public class ReviewRestController {
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = ReviewReadOnlyDTO.class))}),
             @ApiResponse(responseCode = "401", description = "Unauthorized user",
-            content = @Content),
-            @ApiResponse(responseCode = "400", description = "Invalid input supplied",
-            content = @Content),
+            content = {@Content(mediaType = "application/json",
+            schema = @Schema(implementation = ReviewCrudExceptionDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid input provided",
+            content = {@Content(mediaType = "application/json",
+            schema = @Schema(implementation = ReviewCrudExceptionDTO.class))}),
             @ApiResponse(responseCode = "404", description = "Review not found",
-            content = @Content)
+            content = {@Content(mediaType = "application/json",
+            schema = @Schema(implementation = ReviewCrudExceptionDTO.class))})
     })
     @PutMapping("/reviews/{id}")
-    public ResponseEntity<ReviewReadOnlyDTO> updateReview(@PathVariable("id") String id,
+    public ResponseEntity<BaseDTO> updateReview(@PathVariable("id") String id,
                                                           @Valid @RequestBody ReviewUpdateDTO dto,
                                                           BindingResult bindingResult) {
-        if(!Objects.equals(id, dto.getId())) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        if(!Objects.equals(id, dto.getId())) return new ResponseEntity<>(new ReviewCrudExceptionDTO("Unauthorized user"),
+                HttpStatus.UNAUTHORIZED);
         reviewUpdateValidator.validate(dto,bindingResult);
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ReviewCrudExceptionDTO("Invalid input provided"),HttpStatus.BAD_REQUEST);
         }
 
         try {
@@ -158,7 +162,7 @@ public class ReviewRestController {
             ReviewReadOnlyDTO reviewReadOnlyDTO = ReviewMapper.mapToReviewReadOnlyDTO(review);
             return new ResponseEntity<>(reviewReadOnlyDTO, HttpStatus.OK);
         } catch (DocumentNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ReviewCrudExceptionDTO("Review not found"), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -168,17 +172,18 @@ public class ReviewRestController {
             content = {@Content(mediaType = "application/json",
             schema = @Schema(implementation = ReviewReadOnlyDTO.class))}),
             @ApiResponse(responseCode = "404", description = "Review not found",
-            content = @Content)
+            content = {@Content(mediaType = "application/json",
+            schema = @Schema(implementation = ReviewCrudExceptionDTO.class))})
     })
     @DeleteMapping("/reviews/{id}")
-    public ResponseEntity<ReviewReadOnlyDTO> deleteReview(@PathVariable("id") String id) {
+    public ResponseEntity<BaseDTO> deleteReview(@PathVariable("id") String id) {
         try {
             Review review = reviewService.getReviewById(id);
             reviewService.deleteReview(id);
             ReviewReadOnlyDTO reviewReadOnlyDTO = ReviewMapper.mapToReviewReadOnlyDTO(review);
             return new ResponseEntity<>(reviewReadOnlyDTO, HttpStatus.OK);
         } catch (DocumentNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ReviewCrudExceptionDTO("Review not found"),HttpStatus.NOT_FOUND);
         }
     }
 }
