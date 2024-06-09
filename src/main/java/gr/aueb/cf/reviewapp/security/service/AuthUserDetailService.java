@@ -24,6 +24,12 @@ public class AuthUserDetailService implements UserDetailsService {
 
     private final UserRepo repo;
 
+    /**
+     * Loads a user record by their username.
+     * @param username The username of the record to be loaded.
+     * @return A {@link UserDetails} instance representing the authenticated user.
+     * @throws UsernameNotFoundException Is thrown if the user record is not found.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser;

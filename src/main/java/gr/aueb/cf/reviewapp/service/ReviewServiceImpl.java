@@ -34,6 +34,12 @@ public class ReviewServiceImpl implements IReviewService{
         this.repo = repo;
     }
 
+    /**
+     * Inserts a new {@link Review} record.
+     * @param dto The {@link ReviewInsertDTO} containing the information of the new {@link Review}.
+     * @return The newly created {@link Review} record as an object.
+     * @throws Exception Is thrown when there is an error during the insertion operation.
+     */
     @Override
     @Transactional
     public Review insertReview(ReviewInsertDTO dto) throws Exception {
@@ -54,6 +60,12 @@ public class ReviewServiceImpl implements IReviewService{
         return review;
     }
 
+    /**
+     * Updates an existing {@link Review} record.
+     * @param dto The {@link ReviewUpdateDTO} containing the updated information of the {@link Review}.
+     * @return The updated {@link Review} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link Review} record to be updated is not found.
+     */
     @Override
     @Transactional
     public Review updateReview(ReviewUpdateDTO dto) throws DocumentNotFoundException {
@@ -73,6 +85,12 @@ public class ReviewServiceImpl implements IReviewService{
         return updatedReview;
     }
 
+    /**
+     * Deletes an existing {@link Review} record.
+     * @param id The id of the {@link Review} record to be deleted.
+     * @return The deleted {@link Review} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link Review} record to be deleted is not found.
+     */
     @Override
     @Transactional
     public Review deleteReview(String id) throws DocumentNotFoundException {
@@ -92,6 +110,12 @@ public class ReviewServiceImpl implements IReviewService{
         return deletedReview;
     }
 
+    /**
+     * Retrieves a {@link Review} record by id.
+     * @param id The id of the {@link Review} record to be retrieved.
+     * @return The retrieved {@link Review} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link Review} record to be retrieved is not found.
+     */
     @Override
     public Review getReviewById(String id) throws DocumentNotFoundException {
         Optional<Review> optionalReview;
@@ -108,6 +132,12 @@ public class ReviewServiceImpl implements IReviewService{
         return review;
     }
 
+    /**
+     * Retrieves a {@link Review} record by username.
+     * @param username The username of the {@link Review} record to be retrieved.
+     * @return The retrieved {@link Review} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link Review} record to be retrieved is not found.
+     */
     @Override
     public List<Review> getAllReviewsByUsername(String username) throws DocumentNotFoundException {
         List<Review> reviews;

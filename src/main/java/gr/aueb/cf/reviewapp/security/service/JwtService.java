@@ -52,24 +52,45 @@ public class JwtService {
 
     // Public methods
 
+    /**
+     * Extracts username from a JWT token.
+     * @param token A JWT token of type String.
+     * @return The username of type String.
+     */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
+    /**
+     * Generates a JWT token.
+     * @param extraClaims Additional claims to include in the token.
+     * @param userDetails The authenticated user details.
+     * @return A JWT token of type String.
+     */
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder()
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 5))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(convertToKey())
                 .compact();
     }
 
+    /**
+     * Generates a JWT token.
+     * @param userDetails The authenticated user details.
+     * @return A JWT token of type String.
+     */
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
+    /**
+     * Validates a JWT token.
+     * @param token The JWT token to be validated of type String.
+     * @return True if it is a valid JWT token, false otherwise.
+     */
     public boolean validateToken(String token) {
         boolean evalResult = false;
         try {
@@ -82,6 +103,11 @@ public class JwtService {
         return evalResult;
     }
 
+    /**
+     * Extracts a JWT token from a http request.
+     * @param request A http request
+     * @return A JWT token of type String.
+     */
     public String extractToken(HttpServletRequest request) {
         String token = null;
         String authHeader = request.getHeader("Authorization");

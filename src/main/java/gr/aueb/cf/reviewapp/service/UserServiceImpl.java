@@ -37,6 +37,12 @@ public class UserServiceImpl implements IUserService{
     }
 
 
+    /**
+     * Inserts a new {@link User} record.
+     * @param dto The {@link UserInsertDTO} containing the information of the new {@link User}.
+     * @return The newly created {@link User} record as an object.
+     * @throws Exception Is thrown when an error is found during the insertion operation.
+     */
     @Override
     @Transactional
     public User insertUser(UserInsertDTO dto) throws Exception {
@@ -58,6 +64,12 @@ public class UserServiceImpl implements IUserService{
         return user;
     }
 
+    /**
+     * Updates an existing {@link User} record.
+     * @param dto The {@link UserUpdateDTO} containing the updated information of the {@link User}.
+     * @return The updated {@link User} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link User} record to be updated is not found.
+     */
     @Override
     @Transactional
     public User updateUser(UserUpdateDTO dto) throws DocumentNotFoundException {
@@ -79,6 +91,12 @@ public class UserServiceImpl implements IUserService{
         return updatedUser;
     }
 
+    /**
+     * Deletes an existing {@link User} record.
+     * @param id The id of the {@link User} record to be deleted.
+     * @return The deleted {@link User} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link User} record to be deleted is not found.
+     */
     @Override
     @Transactional
     public User deleteUser(String id) throws DocumentNotFoundException {
@@ -97,6 +115,12 @@ public class UserServiceImpl implements IUserService{
         return deletedUser;
     }
 
+    /**
+     * Retrieves a {@link User} record by id.
+     * @param id The id of the {@link User} record to be retrieved.
+     * @return The retrieved {@link User} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link User} record to be retrieved is not found.
+     */
     @Override
     public User getUserById(String id) throws DocumentNotFoundException {
         Optional<User> optionalUser;
@@ -107,13 +131,19 @@ public class UserServiceImpl implements IUserService{
             if(optionalUser.isEmpty()) throw new DocumentNotFoundException(User.class, id);
             user = optionalUser.get();
         } catch(DocumentNotFoundException e) {
-            log.info("Retrieval error");
+            log.info("Retrieval by id error");
             throw e;
         }
 
         return user;
     }
 
+    /**
+     * Retrieves a {@link User} record by username.
+     * @param username The username of the {@link User} record to be retrieved.
+     * @return The retrieved {@link User} record as an object.
+     * @throws DocumentNotFoundException Is thrown when the {@link User} record to be retrieved is not found.
+     */
     @Override
     public User getUserByUsername(String username) throws DocumentNotFoundException {
         Optional<User> optionalUser;
@@ -124,7 +154,7 @@ public class UserServiceImpl implements IUserService{
             if(optionalUser.isEmpty()) throw new DocumentNotFoundException(User.class, username);
             user = optionalUser.get();
         } catch(DocumentNotFoundException e) {
-            log.info("Retrieval error");
+            log.info("Retrieval by username error");
             throw e;
         }
 
