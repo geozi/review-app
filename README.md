@@ -2,7 +2,14 @@
 ![Demo App](https://img.shields.io/badge/demo_app-blue)
 
 ### About the project
-This repository contains the backend implementation of my final project for the [Coding Factory](https://codingfactory.aueb.gr/) training program. The project is a fullstack implementation of a generic review app. A User can register, log in, and post a review that is persisted on MongoDB Atlas. 
+This repository contains the backend implementation of my final project for the [Coding Factory](https://codingfactory.aueb.gr/) training program. The project is a fullstack implementation of a generic review app. A user can register, log in, and post a review that is persisted on MongoDB Atlas. 
+
+### Business logic
+
+There are 2 fundamental business flows supported: user registration and CRUD operations for reviews.
+
+
+![review_app_flows](https://github.com/geozi/review-app/assets/153010644/656733d4-9ed2-4232-ba61-1d2c2ca8f181)
 
 ### Prerequisites
 
