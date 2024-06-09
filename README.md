@@ -44,13 +44,18 @@ The default value of the base URL for API endpoints is:
 http://localhost:8080
 ```
 
-### Testing tools
+### API documentation
 
-To test the REST APIs, a third-party tool can be used, e.g Postman.
+Swagger is the framework of choice for documenting API endpoints. The default url for accessing the Swagger UI is:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
 
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java,gradle,spring,mongo,postman&theme=light" />
+    <img src="https://skillicons.dev/icons?i=java,gradle,spring,mongo,postman&theme=light"/>
+	 
   </a>
 </p>
