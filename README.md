@@ -2,15 +2,17 @@
 ![Demo App](https://img.shields.io/badge/demo_app-blue)
 
 ### About the project
-The uploaded code contains the backend implementation of a review app. A User logs in and, after a successful authentication, s/he can post a review that is persisted on a MongoDB database. 
+This repository contains the backend implementation of my final project for the [Coding Factory](https://codingfactory.aueb.gr/) training program. The project is a fullstack implementation of a generic review app. A User can register, log in, and post a review that is persisted on MongoDB Atlas. 
 
-### Backend Framework
+### Prerequisites
 
-A development goal was to create the backend using Java, thus the Spring framework was chosen. 
+* Java 17 or higher,
+* A Java IDE (Intellij or Eclipse),
+* MongoDB (locally installed or on MongoDB Atlas)
 
 ### Dependencies
 
-Using the Spring Initializr (https://start.spring.io/), the following dependencies were installed:
+Using the Spring Initializr (https://start.spring.io/), the following dependencies should be installed:
 
 ```
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
@@ -27,12 +29,13 @@ Using the Spring Initializr (https://start.spring.io/), the following dependenci
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 ```
-### Prerequisites
+### Base URL
 
-After creating the project with Spring Initializr, the following must exist in order for the build to take place:
-* Java 17 or higher
-* IDE (Intellij or Eclipse)
-* MongoDB (locally installed or on MongoDB Atlas)
+The default value of the base URL for API endpoints is:
+
+```
+http://localhost:8080
+```
 
 ### Testing tools
 
