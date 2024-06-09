@@ -133,10 +133,10 @@ public class ReviewServiceImpl implements IReviewService{
     }
 
     /**
-     * Retrieves a {@link Review} record by username.
-     * @param username The username of the {@link Review} record to be retrieved.
-     * @return The retrieved {@link Review} record as an object.
-     * @throws DocumentNotFoundException Is thrown when the {@link Review} record to be retrieved is not found.
+     * Retrieves all {@link Review} records by username.
+     * @param username The username of the {@link Review} records to be retrieved.
+     * @return The retrieved {@link Review} records as a collection of objects.
+     * @throws DocumentNotFoundException Is thrown when the {@link Review} records to be retrieved are not found.
      */
     @Override
     public List<Review> getAllReviewsByUsername(String username) throws DocumentNotFoundException {
@@ -152,6 +152,12 @@ public class ReviewServiceImpl implements IReviewService{
         return reviews;
     }
 
+    /**
+     * Retrieves all {@link Review} records by subject.
+     * @param subject The subject of the {@link Review} records to be retrieved.
+     * @return The retrieved {@link Review} records as a collection of objects.
+     * @throws Exception Is thrown when the {@link Review} records to be retrieved are not found.
+     */
     @Override
     public List<Review> getAllReviewsBySubject(String subject) throws Exception {
         List<Review> reviews;
