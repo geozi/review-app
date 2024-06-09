@@ -139,7 +139,7 @@ public class ReviewRestController {
             @ApiResponse(responseCode = "401", description = "Unauthorized user",
             content = {@Content(mediaType = "application/json",
             schema = @Schema(implementation = ReviewCrudExceptionDTO.class))}),
-            @ApiResponse(responseCode = "400", description = "Invalid input provided",
+            @ApiResponse(responseCode = "400", description = "Invalid input supplied",
             content = {@Content(mediaType = "application/json",
             schema = @Schema(implementation = ReviewCrudExceptionDTO.class))}),
             @ApiResponse(responseCode = "404", description = "Review not found",
@@ -154,7 +154,7 @@ public class ReviewRestController {
                 HttpStatus.UNAUTHORIZED);
         reviewUpdateValidator.validate(dto,bindingResult);
         if(bindingResult.hasErrors()) {
-            return new ResponseEntity<>(new ReviewCrudExceptionDTO("Invalid input provided"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ReviewCrudExceptionDTO("Invalid input supplied"),HttpStatus.BAD_REQUEST);
         }
 
         try {
