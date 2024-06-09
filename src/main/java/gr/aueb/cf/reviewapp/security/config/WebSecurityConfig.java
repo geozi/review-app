@@ -20,8 +20,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 /**
- * The {@link WebSecurityConfig} class contains
- * authentication filter configurations.
+ * The {@link WebSecurityConfig} class contains the
+ * Security Filter Chain configurations.
  * @author geozi
  * @version 1
  */

@@ -1,5 +1,5 @@
 /**
- * The security.service class contains the class
+ * The security.service package contains the class
  * definitions of authentication services.
  * @author geozi
  * @version 1

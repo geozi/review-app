@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * The {@link UserRestController} class handles
- * the registration requests of new users.
+ * the requests for registration of new users.
  * @author geozi
  * @version 1
  */

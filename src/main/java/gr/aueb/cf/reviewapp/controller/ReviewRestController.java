@@ -29,7 +29,7 @@ import java.util.*;
 
 /**
  * The {@link ReviewRestController} class handles the
- * CRUD requests of Reviews.
+ * CRUD requests for Reviews.
  * @author geozi
  * @version 1
  */

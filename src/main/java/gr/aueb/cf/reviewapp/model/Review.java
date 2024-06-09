@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 /**
  * The {@link Review} class represents a review
- * posted by a User.
+ * posted by a {@link User}.
  * @author geozi
  * @version 1
  */

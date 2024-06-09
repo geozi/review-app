@@ -10,7 +10,9 @@ import java.util.List;
 /**
  * The {@link IReviewService} interface contains
  * the service-layer definitions of the CRUD methods
- * used for managing Review documents.
+ * used for managing {@link Review} documents.
+ * @author geozi
+ * @version 1
  */
 public interface IReviewService {
     Review insertReview(ReviewInsertDTO dto) throws Exception;

@@ -8,7 +8,9 @@ import gr.aueb.cf.reviewapp.service.exceptions.DocumentNotFoundException;
 /**
  * The {@link IUserService} interface contains
  * the service-layer definitions of the CRUD methods
- * used for managing User documents.
+ * used for managing {@link User} documents.
+ * @author geozi
+ * @version 1
  */
 public interface IUserService {
     User insertUser(UserInsertDTO dto) throws Exception;

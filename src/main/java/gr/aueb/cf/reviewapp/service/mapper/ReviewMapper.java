@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * The {@link ReviewMapper} class is a utility class
- * that maps DTOs to the Review domain model class and vice versa.
+ * that maps DTOs to the {@link Review} domain model class and vice versa.
  * @author geozi
  * @version 1
  */

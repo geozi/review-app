@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * The {@link UserMapper} class is a utility class
- * that maps DTOs to the User domain model class and vice versa.
+ * that maps DTOs to the {@link User} domain model class and vice versa.
  * @author geozi
  * @version 1
  */
