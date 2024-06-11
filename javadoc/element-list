@@ -1,4 +1,5 @@
 gr.aueb.cf.reviewapp
+gr.aueb.cf.reviewapp.config
 gr.aueb.cf.reviewapp.controller
 gr.aueb.cf.reviewapp.model
 gr.aueb.cf.reviewapp.repository

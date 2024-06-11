@@ -1,12 +1,16 @@
 package gr.aueb.cf.reviewapp.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import java.time.LocalDateTime;
+
 
 /**
  * The {@link Review} class represents a review
@@ -18,7 +22,6 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Review {
     @MongoId
     private String id;
@@ -26,10 +29,21 @@ public class Review {
     private String username;
     private String subject;
     private String description;
+    @CreatedDate
+    private LocalDateTime created;
+    @LastModifiedDate
+    private LocalDateTime modified;
 
-    // Constructor
+    // Constructors
 
     public Review(String username, String subject, String description) {
+        this.username = username;
+        this.subject = subject;
+        this.description = description;
+    }
+
+    public Review(String id, String username, String subject, String description) {
+        this.id = id;
         this.username = username;
         this.subject = subject;
         this.description = description;
