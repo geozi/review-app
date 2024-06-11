@@ -8,8 +8,7 @@ This repository contains the backend implementation of my final project for the 
 
 There are 2 fundamental business flows supported: user registration and CRUD operations for reviews.
 
-
-![review_app_flows](https://github.com/geozi/review-app/assets/153010644/656733d4-9ed2-4232-ba61-1d2c2ca8f181)
+![review_app_backend](https://github.com/geozi/review-app/assets/153010644/2eaa6379-ea98-4065-935c-bb3ce60dfd2c)
 
 ### Prerequisites
 
