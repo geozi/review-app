@@ -54,7 +54,7 @@ http://localhost:8080/swagger-ui/index.html
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java,gradle,spring,mongo,postman&theme=light"/>
+    <img src="https://skillicons.dev/icons?i=java,gradle,spring,mongo&theme=light"/>
 	 
   </a>
 </p>
