@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
  * The {@link ReviewReadOnlyDTO} class is the
  * DTO equivalent of the {@link Review} domain
@@ -29,4 +31,6 @@ public class ReviewReadOnlyDTO extends BaseDTO {
     private String subject;
     @NotNull
     private String description;
+    @NotNull
+    private LocalDateTime created;
 }

@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReviewReadOnlyDTOTest {
@@ -24,6 +27,11 @@ class ReviewReadOnlyDTOTest {
         reviewDTO.setUsername("ad8b");
         reviewDTO.setSubject("Testing review subject");
         reviewDTO.setDescription("Testing review object");
+
+        String date = "2024-06-12T13:17:32.235Z";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
+        reviewDTO.setCreated(localDateTime);
     }
 
     @AfterEach
@@ -32,6 +40,7 @@ class ReviewReadOnlyDTOTest {
         reviewDTO.setUsername(null);
         reviewDTO.setSubject(null);
         reviewDTO.setDescription(null);
+        reviewDTO.setCreated(null);
     }
 
     // Testing getters
@@ -71,6 +80,15 @@ class ReviewReadOnlyDTOTest {
                 () -> assertNotNull(description),
                 () -> assertFalse(description.isEmpty()),
                 () -> assertEquals("Testing review object", description)
+        );
+    }
+
+    @Test
+    void getCreated() {
+        LocalDateTime localDateTime = reviewDTO.getCreated();
+        assertAll(
+                () -> assertNotNull(localDateTime),
+                () -> assertEquals("2024-06-12T13:17:32.235", localDateTime.toString())
         );
     }
 
@@ -119,6 +137,22 @@ class ReviewReadOnlyDTOTest {
                 () -> assertFalse(description.isEmpty()),
                 () -> assertNotEquals("Testing review object", description),
                 () -> assertEquals("New description", description)
+        );
+    }
+
+    @Test
+    void setCreated(){
+
+        String date = "2024-06-12T12:53:39.242Z";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        LocalDateTime addedLocalDateTime = LocalDateTime.parse(date, formatter);
+        reviewDTO.setCreated(addedLocalDateTime);
+
+        LocalDateTime retrievedLocalDateTime = reviewDTO.getCreated();
+        assertAll(
+                () -> assertNotNull(retrievedLocalDateTime),
+                () -> assertNotEquals("2024-06-12T13:17:32.235", retrievedLocalDateTime.toString()),
+                () -> assertEquals("2024-06-12T12:53:39.242", retrievedLocalDateTime.toString())
         );
     }
 }

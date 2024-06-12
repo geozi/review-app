@@ -30,7 +30,7 @@ public class ReviewMapper {
     }
 
     public static ReviewReadOnlyDTO mapToReviewReadOnlyDTO(Review review) {
-        return new ReviewReadOnlyDTO(review.getId(), review.getUsername(), review.getSubject(), review.getDescription());
+        return new ReviewReadOnlyDTO(review.getId(), review.getUsername(), review.getSubject(), review.getDescription(),review.getCreated());
     }
 
 }

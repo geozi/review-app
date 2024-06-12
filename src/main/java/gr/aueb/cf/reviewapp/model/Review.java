@@ -48,4 +48,12 @@ public class Review {
         this.subject = subject;
         this.description = description;
     }
+
+    public Review(String id, String username, String subject, String description, LocalDateTime created) {
+        this.id = id;
+        this.username = username;
+        this.subject = subject;
+        this.description = description;
+        this.created = created;
+    }
 }
