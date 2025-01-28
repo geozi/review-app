@@ -2,7 +2,7 @@
 ![Demo App](https://img.shields.io/badge/demo_app-blue)
 
 ### About the project
-This repository contains the backend implementation of my final project for the [Coding Factory](https://codingfactory.aueb.gr/) training program. The project is a fullstack implementation of a generic review app. A user can register, log in, and post a review that is persisted on MongoDB Atlas. 
+This repository contains the backend implementation of my final project for the [Coding Factory](https://codingfactory.aueb.gr/) training program. The project is a fullstack, generic review app. A user can register, log in, and post a review about a product or a service, which is, then, persisted on a MongoDB Atlas collection. The frontend implementation can be found [here](https://github.com/geozi/reviewapp-frontend).
 
 ### Business logic
 
@@ -20,7 +20,7 @@ There are 2 fundamental business flows supported: user registration and CRUD ope
 
 Using the Spring Initializr (https://start.spring.io/), the following dependencies should be installed:
 
-```
+```gradle
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
